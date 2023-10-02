@@ -1,11 +1,12 @@
 import os
 
 import pytest
+from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from selene import browser
 
 import config
-from utils import (allure_attach_browserstack_screenshot, allure_attach_browserstack_video)
+from utils import allure_attach_browserstack_screenshot, allure_attach_browserstack_video
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -30,8 +31,7 @@ def mobile_management():
         }
     })
 
-    browser.config.driver_remote_url = config.settings.browserstack_url
-    browser.config.driver_options = options
+    browser.config.driver = webdriver.Remote(config.settings.browserstack_url, options=options)
 
     browser.config.timeout = float(os.getenv('timeout', '10.0'))
 
