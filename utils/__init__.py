@@ -1,0 +1,1 @@
+from .attachments import allure_attach_browserstack_screenshot, allure_attach_browserstack_video
